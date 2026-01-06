@@ -12,7 +12,7 @@ exports.getUsers = async (req, res) => {
 
         res.status(200).json({
             count: users.length,
-            users
+            users: users
         });
 
     } catch (error) {
@@ -85,4 +85,15 @@ exports.deleteUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
+};
+
+// CHANGE ROLE
+exports.changeRole = async (req, res) => {
+    const { role } = req.body;
+    const user = await User.findByIdAndUpdate(
+        req.params.id,
+        { role },
+        { new: true }
+    );
+    res.json(user);
 };

@@ -33,8 +33,26 @@ exports.createBlog = async (req, res) => {
 }
 
 /* ========== GET ALL BLOGS ========== */
+// exports.getBlogs = async (req, res) => {
+//     try {
+//         if (!req.user) {
+//             return res.status(401).json({ message: "Unauthorized" });
+//         }
+
+//         const blogs =
+//             req.user.role === "admin"
+//                 ? await Blog.find().sort({ createdAt: -1 })
+//                 : await Blog.find({ author: req.user._id }).sort({ createdAt: -1 });
+
+//         res.json(blogs);
+//     } catch (err) {
+//         res.status(500).json({ message: "Server error" });
+//     }
+// };
+
 exports.getBlogs = async (req, res) => {
     try {
+        console.log(req.user);
         const blogs = await Blog.find()
             .populate('author', 'name email')
             .sort({ createdAt: -1 })
