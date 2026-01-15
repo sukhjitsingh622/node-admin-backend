@@ -1,5 +1,5 @@
 const User = require('../models/User');
-
+const createLog = require('../utils/createLog');
 /**
  * @desc Get all users
  * @route GET /api/users
@@ -61,6 +61,13 @@ exports.updateUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
+
+        await createLog({
+            user: req.params.id,
+            action: 'UPDATE_USER',
+            description: `Updated User: ${req.params.id}`,
+            ip: req.ip
+        });
 
         res.json({ message: 'User updated', user });
     } catch (error) {

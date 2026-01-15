@@ -8,6 +8,7 @@ const userRoutes = require('./routes/userRoutes');
 const logRoutes = require('./routes/logRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 const profileRoutes = require('./routes/profileRoutes')
+const dashboardRoutes = require('./routes/dashboardRoutes')
 
 // app.use(cors());
 app.use(cors({
@@ -21,6 +22,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/logs', logRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get('/', (req, res) => {
     res.send('Admin Panel Running.');
